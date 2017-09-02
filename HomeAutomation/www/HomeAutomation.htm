@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Home Automation</title>
+		<script src="jquery-3.2.1.js"></script>
+		<!-- <meta http-equiv="refresh" content="3"> -->
+	</head>
+	<body>
+		Remote Light Switch<br>
+		
+		<button
+			id="myButton"
+			type= "submit"
+			onClick="lightSwitchClick(this)"
+			style="background-color:grey"
+		> off </button>
+
+		<script type="text/javascript">   
+			//setInterval(reload, 5000);
+
+			//function reload() {
+			//	location.reload(true);
+			//}
+
+			function lightSwitchClick(button) {
+				if(button.style.backgroundColor == "yellow"){
+					button.style = "background-color:gray";
+					button.innerText = "off";
+				}else{
+					button.style = "background-color:yellow";
+					button.innerText= "on";
+				}
+				
+				//var txt = $("input").val();
+				//$.post("", {suggest: txt}, function(){button.style = "background-color:red";});
+				//$.post("/", "hellooooo", function(){button.style = "background-color:red";});
+			}
+		</script>
+	</body>
+</html>
