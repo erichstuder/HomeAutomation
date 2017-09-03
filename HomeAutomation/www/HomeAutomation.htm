@@ -3,17 +3,27 @@
 	<head>
 		<title>Home Automation</title>
 		<script src="jquery-3.2.1.js"></script>
-		<!-- <meta http-equiv="refresh" content="3"> -->
+		<!--<meta http-equiv="refresh" content="5">-->
 	</head>
-	<body>
+	<body onload ="actualizeStates()">
+
 		Remote Light Switch<br>
-		
-		<button
-			id="myButton"
-			type= "submit"
-			onClick="lightSwitchClick(this)"
-			style="background-color:grey"
-		> off </button>
+
+		<button id="button1"
+				type="button"
+				onclick="return lightSwitchClick(this)"
+				style="background-color:gray">
+			off 
+		</button>
+
+		<br><br><br>
+
+		<button id="reload"
+				type="button"
+				onclick="return actualizeStates()"
+				style="background-color:gray">
+			reload
+		</button>
 
 		<script type="text/javascript">   
 			//setInterval(reload, 5000);
@@ -22,19 +32,39 @@
 			//	location.reload(true);
 			//}
 
-			function lightSwitchClick(button) {
-				if(button.style.backgroundColor == "yellow"){
-					button.style = "background-color:gray";
-					button.innerText = "off";
-				}else{
-					button.style = "background-color:yellow";
-					button.innerText= "on";
-				}
-				
-				//var txt = $("input").val();
-				//$.post("", {suggest: txt}, function(){button.style = "background-color:red";});
-				//$.post("/", "hellooooo", function(){button.style = "background-color:red";});
+			function actualizeStates() {
+				getLightState(button1);
+				//there are more to come
 			}
+
+			function getLightState(button) {
+				$.get('/arduino/msg/state/', function (data, status) { setLightState(data, button); });
+			}
+
+			function lightSwitchClick(button) {
+				if (button.innerText == "off") {
+					$.get('/arduino/msg/on/', function (data, status) { setLightState(data, button); });
+					//button.style.backgroundColor = "yellow";
+					//button.innerText = "on";
+				} else {
+					$.get('/arduino/msg/off/', function (data, status) { setLightState(data, button); });
+					//button.style = "background-color:gray";
+					//button.innerText = "off";
+				}
+				return false;
+			}
+
+			function setLightState(data, button) {
+				if (data == "on") {
+					button.style.backgroundColor = "yellow";
+					button.innerText = "on";
+				}
+				else {
+					button.style.backgroundColor = "gray";
+					button.innerText = "off";
+				}
+			}
+			
 		</script>
 	</body>
 </html>
