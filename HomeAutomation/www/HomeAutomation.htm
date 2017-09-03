@@ -5,7 +5,7 @@
 		<script src="jquery-3.2.1.js"></script>
 		<!--<meta http-equiv="refresh" content="5">-->
 	</head>
-	<body onload ="actualizeStates()">
+	<body onload ="init()">
 
 		Remote Light Switch<br>
 
@@ -31,6 +31,11 @@
 			//function reload() {
 			//	location.reload(true);
 			//}
+
+			function init() {
+				actualizeStates();
+				//setInterval(actualizeStates, 1000);
+			}
 
 			function actualizeStates() {
 				getLightState(button1);
