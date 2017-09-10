@@ -3,8 +3,8 @@
 	<head>
 		<title>Home Automation</title>
 		<script src="jquery-3.2.1.js"></script>
-		<!--<meta http-equiv="refresh" content="5">-->
 	</head>
+
 	<body onload ="init()">
 
 		Remote Light Switch<br>
@@ -12,8 +12,8 @@
 		<button id="button1"
 				type="button"
 				onclick="return lightSwitchClick(this)"
-				style="background-color:gray">
-			off 
+				style="background-color:black">
+			???
 		</button>
 
 		<br><br><br>
@@ -26,15 +26,9 @@
 		</button>
 
 		<script type="text/javascript">   
-			//setInterval(reload, 5000);
-
-			//function reload() {
-			//	location.reload(true);
-			//}
 
 			function init() {
 				actualizeStates();
-				//setInterval(actualizeStates, 1000);
 			}
 
 			function actualizeStates() {
@@ -49,12 +43,8 @@
 			function lightSwitchClick(button) {
 				if (button.innerText == "off") {
 					$.get('/arduino/msg/on/', function (data, status) { setLightState(data, button); });
-					//button.style.backgroundColor = "yellow";
-					//button.innerText = "on";
 				} else {
 					$.get('/arduino/msg/off/', function (data, status) { setLightState(data, button); });
-					//button.style = "background-color:gray";
-					//button.innerText = "off";
 				}
 				return false;
 			}
