@@ -64,6 +64,9 @@ void loop() {
 					client.print("off");
 				}
 			}
+			else if (msg.startsWith("dummy")) {
+				client.print("dummy");
+			}
 		}
 		client.flush();
 		client.stop();
