@@ -274,5 +274,4 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 
-# not needed xml files
-**/__vm/*.xml
+*.xml
